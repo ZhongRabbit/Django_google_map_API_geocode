@@ -1,2 +1,12 @@
-# Django_google_map_API_geocode
-A Django web app that invokes google maps API call, reformatting &amp; geocoding manually entered addresses
+<h2>Django_google_map_API_geocode</h2>
+<h4>A Django web app that invokes google maps geocode API call, allowing manually entered addresses to be standardized and geocoded. For instance, manually entering "800 Hunting Ave, Boston" will result in:</h4>
+<ul>
+    <li>A standardized address of "800 Hunting Ave, Boston MA 02115, USA"</li>
+    <li>Latitude of "42.3329583"</li>
+    <li>Longitude of "-71.10753"</li>
+</ul>
+<h4>This particular web app will throw a warning when the geocoded address is outside of Massachusetts, since in the particular case where this web app is used, the addresses should always be within MA. You can change this by checking the geocoded JSON object.</h4>
+
+Ref:
+<a href="https://developers.google.com/maps/documentation/geocoding/start#sample-request">Google Maps Geocode API</a>
+<a href="https://developers.google.com/maps/documentation/javascript/overview">Google Maps Javascript API, though intentionally not used in this case.</a>
