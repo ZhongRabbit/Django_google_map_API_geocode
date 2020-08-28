@@ -1,0 +1,2 @@
+Paste your google map geocode key here.
+Make sure this file is not accessible by others!

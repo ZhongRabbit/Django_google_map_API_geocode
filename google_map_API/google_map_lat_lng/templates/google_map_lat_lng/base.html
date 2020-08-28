@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <script src="{% static "jquery-3.5.1.min.js" %}"></script>
+	<title>
+		{% block title %}
+		{% endblock %}
+	</title>
+</head>
+<body style="background-color:#e5e8da;">
+	<style>
+		.content {
+			max-width: 1000px;
+			margin: auto;
+		}
+
+		table {
+			border_collapse: collapse;
+			margin-left: 20px;
+		}
+
+		th, td {
+			width: 7 rem;
+			height: 2 rem;
+			border: 1px solid black;
+			padding-left: 20px;
+			padding-right: 20px;
+			text-align: center;
+		}
+
+		th {
+			background: lightblue;
+		}
+
+                .wrapper {
+                    position: relative;
+                }
+
+                .overlay {
+                    position: absolute;
+                    top: {{ pointer_loc_y_pixel }}px;
+                    left: {{ pointer_loc_x_pixel }}px;
+                }
+
+                .input_description {
+                        font-size: 1.5em;
+                        font-family: Calibri;
+                        margin: .75em 0;
+                        color: rgb(23, 23, 190);
+                }
+                .descrption {
+                        font-size: 1.5em;
+                        font-family: Calibri;
+                        margin: .75em 0;
+                }
+
+/*
+                #title_img {
+                    display:inline-block;
+                    width:250px;
+                }
+
+                #site_desc {
+                    display:inline-block;
+                    width:700px;
+                    align:right;
+                    padding:5px;
+                }
+*/                
+                .footer {
+                        position: relative;
+                        bottom: 0;
+                }
+	</style>
+
+	<div class="content">
+		{% block body %}
+		{% endblock %}
+	</div>
+
+</body>
+
+{% block script %}
+{% endblock %}
+</html>

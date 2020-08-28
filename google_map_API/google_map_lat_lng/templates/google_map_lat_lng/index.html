@@ -1,0 +1,97 @@
+{% extends 'google_map_lat_lng/base.html' %}
+
+{% block title %}
+
+Google Maps API
+
+{% endblock %}
+
+{% block body %}
+        {% load static %}
+        <h1 id="site_desc" style="font-family:'Calibri'"><b>Google Map Geocode Tool</b></h1>
+        <hr>
+        <form action="{% url 'look_up' %}" method="post">
+                {% csrf_token %}
+                <input type="text" id="raw_address" name="raw_address" placeholder="Enter address" size="70">
+                <input id="geocode_button" type="submit" value="Geocode">
+        </form>
+
+        <hr>
+        {% if has_result %}
+                <p class="input_description">Input address (for ref. only): {{ input_address }}</span>
+        {% else %}
+            <br>
+        {% endif %}
+        <hr>
+        {% if inside_ma or not has_result %}
+                <p class="descrption">Geocode Result:</p>
+        {% else %}
+                <p class="descrption">
+                        <span>Geocode Result: </span>
+                        <span style="color:rgb(221, 24, 24)">The geocoded address is outside of MA!</span>
+                </p>
+        {% endif %}
+
+        {% if has_result %}
+                <table>
+                        <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                        </tr>
+
+                        <tr>
+                                <td>Geocoded Address</td>
+                                <td>{{ geocoded_address }}</td>
+                        </tr>
+
+                        <tr>
+                                <td>Latitude</td>
+                                <td>{{ lat }}</td>
+                        </tr>
+
+                        <tr>
+                                <td>Longitude</td>
+                                <td>{{ lng }}</td>
+                        </tr>
+                </table>
+        {% else %}
+                <p class="descrption" style="color:rgb(221, 24, 24)"><b>{{ res }}</b></p>
+
+        {% endif %}
+
+        <br>
+        <!-- Of course, one can use the Google Maps Javascript API instead of this poor mans's map rendering. If you do that, make sure the API key is protected from being stolen (one can use "inspect" functionality in most modern browsers to view API key in Javascript)! -->
+        <!-- Google Maps Javascript API: https://developers.google.com/maps/documentation/javascript/overview -->
+        <div class="wrapper">
+            <div>
+                <img width="1000px" src="{% static "images/MA_screenshot.png" %}" alt="Massachusetts Image"></img>
+            </div>
+            {% if has_result %}
+                <img class="overlay" width="32px" src="{% static "images/map_pin_sm_pink.jpg" %}" alt="pointer"></img>
+            {% else %}
+            {% endif %}
+        </div>
+        <footer class="footer">
+            <br>
+            <p>Author: Zhong Gao</p>
+            <p><a href="mailto:zgao@commonwealthcare.org">Contact</a></p>
+        </footer>
+
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#geocode_button").attr("disabled", true);
+        $("#raw_address").keyup(function(){
+            if($(this).val().length != 0)
+                $("#geocode_button").attr("disabled", false);
+            else
+                $("#geocode_button").attr("disabled", true);
+        })
+    });
+</script>
+
+{% endblock %}
+
